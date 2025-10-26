@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>สั่งกาแฟออนไลน์</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Kanit', sans-serif; }
+    .coffee-bg { background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #F4A460 100%); min-height: 100vh; }
+    .order-summary { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+  </style>
+</head>
+<body class="coffee-bg">
+  <div class="min-h-full py-8 px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Header -->
+      <header class="text-center mb-8">
+        <div class="text-6xl mb-4">☕</div>
+        <h1 class="text-4xl font-bold text-white mb-2">Coffee House</h1>
+        <p class="text-white/80 text-lg">สั่งกาแฟสดใหม่ได้ที่นี่</p>
+      </header>
+
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Order Form -->
+        <div class="bg-white rounded-2xl shadow-2xl p-8">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-6">สั่งเครื่องดื่มของคุณ</h2>
+
+          <form id="coffeeForm" class="space-y-6">
+            <!-- Menu -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-3">เลือกเมนู (เลือกได้หลายรายการ)</label>
+              <div class="space-y-4">
+                <!-- Espresso -->
+                <div class="coffee-item cursor-pointer" data-name="เอสเปรสโซ่เย็น" data-price="40">
+                  <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-amber-500 transition-colors">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <div class="text-2xl">☕</div>
+                        <div>
+                          <div class="font-medium">เอสเปรสโซ่เย็น</div>
+                          <div class="text-amber-600 text-sm">40 บาท</div>
+                        </div>
+                      </div>
+                      <div class="quantity-controls hidden flex items-center gap-2">
+                        <button type="button" class="decrease-btn w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300">-</button>
+                        <span class="quantity-display font-semibold min-w-[20px] text-center">1</span>
+                        <button type="button" class="increase-btn w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300">+</button>
+                      </div>
+                    </div>
+                    <div class="sweetness-section hidden mt-3 pt-3 border-t">
+                      <label class="block text-xs font-medium text-gray-600 mb-2">ความหวาน</label>
+                      <select class="sweetness-select w-full p-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                        <option value="ไม่หวาน">ไม่หวาน</option>
+                        <option value="หวานน้อย">หวานน้อย</option>
+                        <option value="หวานปกติ" selected>หวานปกติ</option>
+                        <option value="หวานมาก">หวานมาก</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Cappuccino -->
+                <div class="coffee-item cursor-pointer" data-name="คาปูชิโน่เย็น" data-price="40">
+                  <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-amber-500 transition-colors">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <div class="text-2xl">☕</div>
+                        <div>
+                          <div class="font-medium">คาปูชิโน่เย็น</div>
+                          <div class="text-amber-600 text-sm">40 บาท</div>
+                        </div>
+                      </div>
+                      <div class="quantity-controls hidden flex items-center gap-2">
+                        <button type="button" class="decrease-btn w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300">-</button>
+                        <span class="quantity-display font-semibold min-w-[20px] text-center">1</span>
+                        <button type="button" class="increase-btn w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300">+</button>
+                      </div>
+                    </div>
+                    <div class="sweetness-section hidden mt-3 pt-3 border-t">
+                      <label class="block text-xs font-medium text-gray-600 mb-2">ความหวาน</label>
+                      <select class="sweetness-select w-full p-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                        <option value="ไม่หวาน">ไม่หวาน</option>
+                        <option value="หวานน้อย">หวานน้อย</option>
+                        <option value="หวานปกติ" selected>หวานปกติ</option>
+                        <option value="หวานมาก">หวานมาก</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Latte -->
+                <div class="coffee-item cursor-pointer" data-name="ลาเต้เย็น" data-price="40">
+                  <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-amber-500 transition-colors">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <div class="text-2xl">🥛</div>
+                        <div>
+                          <div class="font-medium">ลาเต้เย็น</div>
+                          <div class="text-amber-600 text-sm">40 บาท</div>
+                        </div>
+                      </div>
+                      <div class="quantity-controls hidden flex items-center gap-2">
+                        <button type="button" class="decrease-btn w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300">-</button>
+                        <span class="quantity-display font-semibold min-w-[20px] text-center">1</span>
+                        <button type="button" class="increase-btn w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300">+</button>
+                      </div>
+                    </div>
+                    <div class="sweetness-section hidden mt-3 pt-3 border-t">
+                      <label class="block text-xs font-medium text-gray-600 mb-2">ความหวาน</label>
+                      <select class="sweetness-select w-full p-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                        <option value="ไม่หวาน">ไม่หวาน</option>
+                        <option value="หวานน้อย">หวานน้อย</option>
+                        <option value="หวานปกติ" selected>หวานปกติ</option>
+                        <option value="หวานมาก">หวานมาก</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Americano -->
+                <div class="coffee-item cursor-pointer" data-name="อเมริกาโน่เย็น" data-price="40">
+                  <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-amber-500 transition-colors">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <div class="text-2xl">☕</div>
+                        <div>
+                          <div class="font-medium">อเมริกาโน่เย็น</div>
+                          <div class="text-amber-600 text-sm">40 บาท</div>
+                        </div>
+                      </div>
+                      <div class="quantity-controls hidden flex items-center gap-2">
+                        <button type="button" class="decrease-btn w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300">-</button>
+                        <span class="quantity-display font-semibold min-w-[20px] text-center">1</span>
+                        <button type="button" class="increase-btn w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300">+</button>
+                      </div>
+                    </div>
+                    <div class="sweetness-section hidden mt-3 pt-3 border-t">
+                      <label class="block text-xs font-medium text-gray-600 mb-2">ความหวาน</label>
+                      <select class="sweetness-select w-full p-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                        <option value="ไม่หวาน">ไม่หวาน</option>
+                        <option value="หวานน้อย">หวานน้อย</option>
+                        <option value="หวานปกติ" selected>หวานปกติ</option>
+                        <option value="หวานมาก">หวานมาก</option>
+                      </select>
+                    </div>
+                    <div class="bean-section hidden mt-3 pt-3 border-t">
+                      <label class="block text-xs font-medium text-gray-600 mb-2">เมล็ดกาแฟ</label>
+                      <select class="bean-select w-full p-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                        <option value="คั่วกลาง" selected>คั่วกลาง</option>
+                        <option value="คั่วเข้ม">คั่วเข้ม</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Thai Tea -->
+                <div class="coffee-item cursor-pointer" data-name="ชาไทยเย็น (ไม่ใส่สี)" data-price="40">
+                  <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-amber-500 transition-colors">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <div class="text-2xl">🧊</div>
+                        <div>
+                          <div class="font-medium">ชาไทยเย็น (ไม่ใส่สี)</div>
+                          <div class="text-amber-600 text-sm">40 บาท</div>
+                        </div>
+                      </div>
+                      <div class="quantity-controls hidden flex items-center gap-2">
+                        <button type="button" class="decrease-btn w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300">-</button>
+                        <span class="quantity-display font-semibold min-w-[20px] text-center">1</span>
+                        <button type="button" class="increase-btn w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-sm hover:bg-gray-300">+</button>
+                      </div>
+                    </div>
+                    <div class="sweetness-section hidden mt-3 pt-3 border-t">
+                      <label class="block text-xs font-medium text-gray-600 mb-2">ความหวาน</label>
+                      <select class="sweetness-select w-full p-2 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
+                        <option value="ไม่หวาน">ไม่หวาน</option>
+                        <option value="หวานน้อย">หวานน้อย</option>
+                        <option value="หวานปกติ" selected>หวานปกติ</option>
+                        <option value="หวานมาก">หวานมาก</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Customer Info -->
+            <div class="border-t pt-6">
+              <h3 class="text-lg font-medium text-gray-800 mb-4">ข้อมูลลูกค้า</h3>
+              <div class="space-y-4">
+                <div>
+                  <label for="customerName" class="block text-sm font-medium text-gray-700 mb-2">ชื่อ-นามสกุล</label>
+                  <input type="text" id="customerName" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"/>
+                </div>
+                <div>
+                  <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">เบอร์โทรศัพท์</label>
+                  <input type="tel" id="phone" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"/>
+                </div>
+              </div>
+            </div>
+
+            <!-- Notes -->
+            <div>
+              <label for="notes" class="block text-sm font-medium text-gray-700 mb-2">หมายเหตุพิเศษ</label>
+              <textarea id="notes" rows="3" placeholder="เช่น ไม่ใส่น้ำตาล, เพิ่มช็อต..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"></textarea>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="w-full bg-amber-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-amber-700 transition-colors shadow-lg">
+              สั่งเครื่องดื่มเลย! ☕
+            </button>
+          </form>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary rounded-2xl shadow-2xl p-8 h-fit">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-6">สรุปคำสั่งซื้อ</h3>
+          <div id="orderSummary" class="space-y-4">
+            <div class="text-center text-gray-500 py-8">
+              <div class="text-4xl mb-4">☕</div>
+              <p>เลือกเมนูที่คุณต้องการ</p>
+            </div>
+          </div>
+          <div id="totalSection" class="hidden border-t pt-4 mt-6">
+            <div class="flex justify-between items-center text-xl font-semibold">
+              <span>ราคารวม:</span>
+              <span id="totalPrice" class="text-amber-600">0 บาท</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sweetness Modal -->
+  <div id="sweetnessModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl p-8 max-w-md w-full">
+      <h3 class="text-xl font-semibold text-gray-800 mb-4">ปรับแต่งสำหรับแต่ละแก้ว</h3>
+      <div id="sweetnessModalContent" class="space-y-4 mb-6"></div>
+      <div class="flex gap-3">
+        <button id="saveSweetness" class="flex-1 bg-amber-600 text-white py-3 px-4 rounded-lg hover:bg-amber-700 transition-colors">บันทึก</button>
+        <button id="cancelSweetness" class="flex-1 bg-gray-300 text-gray-700 py-3 px-4 rounded-lg hover:bg-gray-400 transition-colors">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl p-8 max-w-md w-full text-center">
+      <div class="text-6xl mb-4">✅</div>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-4">สั่งเครื่องดื่มสำเร็จ!</h3>
+      <p class="text-gray-600 mb-6">ขอบคุณสำหรับคำสั่งซื้อ เราจะเตรียมเครื่องดื่มให้คุณในไม่ช้า</p>
+      <div id="orderNumber" class="bg-amber-100 text-amber-800 px-4 py-2 rounded-lg mb-6 font-semibold"></div>
+      <button id="closeModal" class="bg-amber-600 text-white px-6 py-3 rounded-lg hover:bg-amber-700 transition-colors">ปิด</button>
+    </div>
+  </div>
+
+  <!-- ===== Script (ก้อนเดียวจบ) ===== -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    /** CONFIG */
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzCz4A8onel3PiI0Ur8GtM7CSMkIhs1DILzKGuEvFDKyNpMqykIwd0_j_NxwcPJerEoHA/exec';
+
+    /** STATE */
+    let selectedItems = {};
+    let orderCounter = 1001;
+    let currentSweetnessItem = null;
+
+    /** HELPERS */
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => document.querySelectorAll(sel);
+
+    function explodeItemsToCups(items) {
+      const cups = [];
+      Object.values(items).forEach(item => {
+        const qty = item.quantity || 1;
+
+        const sweetnessList = item.sweetnessList && item.sweetnessList.length === qty
+          ? item.sweetnessList
+          : Array(qty).fill(item.sweetness || 'หวานปกติ');
+
+        const beanList = (item.name === 'อเมริกาโน่เย็น')
+          ? ((item.beanList && item.beanList.length === qty) ? item.beanList : Array(qty).fill(item.bean || 'คั่วกลาง'))
+          : Array(qty).fill(item.bean || '');
+
+        for (let i = 0; i < qty; i++) {
+          cups.push({
+            name: item.name,
+            qty: 1,
+            pricePerUnit: item.price,
+            sweetness: sweetnessList[i],
+            bean: beanList[i] || ''
+          });
+        }
+      });
+      return cups;
+    }
+
+    function calcTotal(items) {
+      let total = 0;
+      Object.values(items).forEach(it => total += it.price * it.quantity);
+      return total;
+    }
+
+    function showInlineError(msg, targetSel='.border-t') {
+      const existing = $('.error-message');
+      if (existing) existing.remove();
+      const div = document.createElement('div');
+      div.className = 'error-message bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4';
+      div.textContent = msg;
+      $(targetSel).insertBefore(div, $(targetSel).firstChild);
+    }
+
+    function updateOrderSummary() {
+      const itemCount = Object.keys(selectedItems).length;
+      if (itemCount === 0) {
+        $('#orderSummary').innerHTML = `
+          <div class="text-center text-gray-500 py-8">
+            <div class="text-4xl mb-4">☕</div>
+            <p>เลือกเมนูที่คุณต้องการ</p>
+          </div>`;
+        $('#totalSection').classList.add('hidden');
+        return;
+      }
+
+      let totalPrice = 0;
+      let orderHTML = '<div class="space-y-4">';
+
+      Object.values(selectedItems).forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        totalPrice += itemTotal;
+
+        orderHTML += `
+          <div class="border-b pb-3">
+            <div class="flex justify-between items-center mb-1">
+              <div>
+                <span class="font-medium">${item.name}</span>
+                <span class="text-sm text-gray-600 ml-2">x${item.quantity}</span>
+              </div>
+              <span>${itemTotal} บาท</span>
+            </div>
+            <div class="text-xs text-gray-600">`;
+
+        if (item.quantity === 1) {
+          orderHTML += `<div>ความหวาน: ${item.sweetness}</div>`;
+          if (item.bean) orderHTML += `<div>เมล็ดกาแฟ: ${item.bean}</div>`;
+        } else {
+          for (let i = 1; i <= item.quantity; i++) {
+            const cupSweetness = item.sweetnessList ? item.sweetnessList[i-1] : item.sweetness;
+            let cupDetails = `แก้วที่ ${i}: ${cupSweetness}`;
+            if (item.name === 'อเมริกาโน่เย็น' && item.beanList) {
+              const cupBean = item.beanList[i-1];
+              cupDetails += `, ${cupBean}`;
+            }
+            orderHTML += `<div>${cupDetails}</div>`;
+          }
+        }
+
+        orderHTML += `</div></div>`;
+      });
+
+      orderHTML += '</div>';
+      $('#orderSummary').innerHTML = orderHTML;
+      $('#totalPrice').textContent = `${totalPrice} บาท`;
+      $('#totalSection').classList.remove('hidden');
+    }
+
+    /** SELECT ITEMS & CONTROLS */
+    $$('.coffee-item').forEach(item => {
+      const itemName = item.dataset.name;
+      const itemPrice = parseInt(item.dataset.price);
+      const itemDiv = item.querySelector('div');
+      const quantityControls = item.querySelector('.quantity-controls');
+      const quantityDisplay = item.querySelector('.quantity-display');
+      const decreaseBtn = item.querySelector('.decrease-btn');
+      const increaseBtn = item.querySelector('.increase-btn');
+      const sweetnessSection = item.querySelector('.sweetness-section');
+      const beanSection = item.querySelector('.bean-section');
+      const sweetnessSelect = item.querySelector('.sweetness-select');
+      const beanSelect = item.querySelector('.bean-select');
+
+      // Toggle select/deselect
+      item.addEventListener('click', (e) => {
+        if (e.target.closest('.quantity-controls') || e.target.closest('.sweetness-section') || e.target.closest('.bean-section')) return;
+
+        if (selectedItems[itemName]) {
+          delete selectedItems[itemName];
+          itemDiv.classList.remove('border-amber-500', 'bg-amber-50');
+          itemDiv.classList.add('border-gray-200');
+          quantityControls.classList.add('hidden');
+          if (sweetnessSection) sweetnessSection.classList.add('hidden');
+          if (beanSection) beanSection.classList.add('hidden');
+        } else {
+          selectedItems[itemName] = {
+            name: itemName,
+            price: itemPrice,
+            quantity: 1,
+            sweetness: sweetnessSelect ? sweetnessSelect.value : 'หวานปกติ',
+            bean: beanSelect ? beanSelect.value : null
+          };
+          itemDiv.classList.remove('border-gray-200');
+          itemDiv.classList.add('border-amber-500', 'bg-amber-50');
+          quantityControls.classList.remove('hidden');
+          if (sweetnessSection) sweetnessSection.classList.remove('hidden');
+          if (beanSection) beanSection.classList.remove('hidden');
+          quantityDisplay.textContent = '1';
+        }
+        updateOrderSummary();
+      });
+
+      // Quantity -
+      if (decreaseBtn) decreaseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (selectedItems[itemName] && selectedItems[itemName].quantity > 1) {
+          selectedItems[itemName].quantity--;
+          if (selectedItems[itemName].sweetnessList && selectedItems[itemName].sweetnessList.length > 1) {
+            selectedItems[itemName].sweetnessList.pop();
+          }
+          if (itemName === 'อเมริกาโน่เย็น' && selectedItems[itemName].beanList && selectedItems[itemName].beanList.length > 1) {
+            selectedItems[itemName].beanList.pop();
+          }
+          quantityDisplay.textContent = selectedItems[itemName].quantity;
+          updateOrderSummary();
+          showSweetnessModal(itemName);
+        }
+      });
+
+      // Quantity +
+      if (increaseBtn) increaseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (selectedItems[itemName] && selectedItems[itemName].quantity < 10) {
+          selectedItems[itemName].quantity++;
+          quantityDisplay.textContent = selectedItems[itemName].quantity;
+          updateOrderSummary();
+          showSweetnessModal(itemName);
+        }
+      });
+
+      // Default sweetness/bean change
+      if (sweetnessSelect) {
+        sweetnessSelect.addEventListener('change', (e) => {
+          e.stopPropagation();
+          if (selectedItems[itemName]) {
+            selectedItems[itemName].sweetness = e.target.value;
+            updateOrderSummary();
+          }
+        });
+      }
+      if (beanSelect) {
+        beanSelect.addEventListener('change', (e) => {
+          e.stopPropagation();
+          if (selectedItems[itemName]) {
+            selectedItems[itemName].bean = e.target.value;
+            updateOrderSummary();
+          }
+        });
+      }
+    });
+
+    /** SWEETNESS MODAL */
+    function showSweetnessModal(itemName) {
+      if (!selectedItems[itemName] || selectedItems[itemName].quantity <= 1) return;
+
+      currentSweetnessItem = itemName;
+      const item = selectedItems[itemName];
+
+      if (!item.sweetnessList) item.sweetnessList = Array(item.quantity).fill(item.sweetness);
+      while (item.sweetnessList.length < item.quantity) item.sweetnessList.push(item.sweetness);
+
+      if (itemName === 'อเมริกาโน่เย็น') {
+        if (!item.beanList) item.beanList = Array(item.quantity).fill(item.bean || 'คั่วกลาง');
+        while (item.beanList.length < item.quantity) item.beanList.push(item.bean || 'คั่วกลาง');
+      }
+
+      let modalContent = '';
+      for (let i = 1; i <= item.quantity; i++) {
+        modalContent += `
+          <div class="border-b pb-4 mb-4 last:border-b-0 last:pb-0 last:mb-0">
+            <h4 class="font-semibold text-gray-800 mb-3">แก้วที่ ${i}</h4>
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <label class="font-medium">ความหวาน:</label>
+                <select class="cup-sweetness p-2 border border-gray-300 rounded focus:ring-2 focus:ring-amber-500" data-cup="${i-1}">
+                  <option value="ไม่หวาน" ${item.sweetnessList[i-1] === 'ไม่หวาน' ? 'selected' : ''}>ไม่หวาน</option>
+                  <option value="หวานน้อย" ${item.sweetnessList[i-1] === 'หวานน้อย' ? 'selected' : ''}>หวานน้อย</option>
+                  <option value="หวานปกติ" ${item.sweetnessList[i-1] === 'หวานปกติ' ? 'selected' : ''}>หวานปกติ</option>
+                  <option value="หวานมาก" ${item.sweetnessList[i-1] === 'หวานมาก' ? 'selected' : ''}>หวานมาก</option>
+                </select>
+              </div>
+              ${itemName === 'อเมริกาโน่เย็น' ? `
+                <div class="flex items-center justify-between">
+                  <label class="font-medium">เมล็ดกาแฟ:</label>
+                  <select class="cup-bean p-2 border border-gray-300 rounded focus:ring-2 focus:ring-amber-500" data-cup="${i-1}">
+                    <option value="คั่วกลาง" ${item.beanList[i-1] === 'คั่วกลาง' ? 'selected' : ''}>คั่วกลาง</option>
+                    <option value="คั่วเข้ม" ${item.beanList[i-1] === 'คั่วเข้ม' ? 'selected' : ''}>คั่วเข้ม</option>
+                  </select>
+                </div>` : ''
+              }
+            </div>
+          </div>`;
+      }
+
+      $('#sweetnessModalContent').innerHTML = modalContent;
+      $('#sweetnessModal').classList.remove('hidden');
+    }
+    $('#saveSweetness').addEventListener('click', () => {
+      if (currentSweetnessItem && selectedItems[currentSweetnessItem]) {
+        const sweetnessSelects = $$('.cup-sweetness');
+        const sweetnessList = [];
+        sweetnessSelects.forEach(select => sweetnessList.push(select.value));
+        selectedItems[currentSweetnessItem].sweetnessList = sweetnessList;
+
+        if (currentSweetnessItem === 'อเมริกาโน่เย็น') {
+          const beanSelects = $$('.cup-bean');
+          const beanList = [];
+          beanSelects.forEach(select => beanList.push(select.value));
+          selectedItems[currentSweetnessItem].beanList = beanList;
+        }
+        updateOrderSummary();
+      }
+      $('#sweetnessModal').classList.add('hidden');
+      currentSweetnessItem = null;
+    });
+    $('#cancelSweetness').addEventListener('click', () => {
+      $('#sweetnessModal').classList.add('hidden');
+      currentSweetnessItem = null;
+    });
+    $('#sweetnessModal').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        e.currentTarget.classList.add('hidden');
+        currentSweetnessItem = null;
+      }
+    });
+
+    /** SUCCESS MODAL */
+    $('#closeModal').addEventListener('click', () => $('#successModal').classList.add('hidden'));
+    $('#successModal').addEventListener('click', (e) => { if (e.target === e.currentTarget) e.currentTarget.classList.add('hidden'); });
+
+    /** SUBMIT → Google Apps Script */
+    $('#coffeeForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const customerName = $('#customerName').value.trim();
+      const phone = $('#phone').value.trim();
+      const notes = $('#notes').value.trim();
+
+      if (!customerName || !phone) {
+        showInlineError('กรุณากรอกข้อมูลลูกค้าให้ครบถ้วน');
+        return;
+      }
+      if (Object.keys(selectedItems).length === 0) {
+        showInlineError('กรุณาเลือกเมนูอย่างน้อย 1 รายการ', '#coffeeForm');
+        return;
+      }
+
+      const payload = {
+        customerName,
+        phone,
+        notes,
+        total: calcTotal(selectedItems),
+        items: explodeItemsToCups(selectedItems)
+      };
+
+      try {
+        const res = await fetch(WEB_APP_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        console.log('POST status:', res.status);
+        let data = {};
+        try { data = await res.json(); } catch (e) { console.warn('JSON parse fail', e); }
+
+        if (data && data.ok && data.orderNo) {
+          $('#orderNumber').textContent = `หมายเลขคำสั่งซื้อ: #${data.orderNo}`;
+        } else {
+          $('#orderNumber').textContent = `หมายเลขคำสั่งซื้อ (ชั่วคราว): #${orderCounter}`;
+        }
+
+        // Success modal
+        $('#successModal').classList.remove('hidden');
+        orderCounter++;
+
+        // Reset UI
+        $('#coffeeForm').reset();
+        selectedItems = {};
+        document.querySelectorAll('.coffee-item div').forEach(div => {
+          div.classList.remove('border-amber-500', 'bg-amber-50');
+          div.classList.add('border-gray-200');
+        });
+        document.querySelectorAll('.quantity-controls').forEach(c => c.classList.add('hidden'));
+        document.querySelectorAll('.sweetness-section').forEach(s => s.classList.add('hidden'));
+        document.querySelectorAll('.bean-section').forEach(s => s.classList.add('hidden'));
+        const existingError = document.querySelector('.error-message'); if (existingError) existingError.remove();
+        updateOrderSummary();
+
+      } catch (err) {
+        showInlineError('ส่งข้อมูลไป Google Sheets ไม่สำเร็จ ลองใหม่อีกครั้ง');
+        console.error('Fetch error:', err);
+      }
+    });
+  });
+  </script>
+</body>
+</html>
